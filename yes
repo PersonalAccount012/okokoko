@@ -3,15 +3,14 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildOfClass("Humanoid")
 
 if humanoid then
-    humanoid.HipHeight = 0 -- Lower the character to the ground
-    humanoid.WalkSpeed = 8 -- Reduce speed for realism
-end
+    local animator = humanoid:FindFirstChild("Animator") or Instance.new("Animator", humanoid)
 
--- Ensure the character stays in the low position if they reset
-player.CharacterAdded:Connect(function(newCharacter)
-    humanoid = newCharacter:FindFirstChildOfClass("Humanoid")
-    if humanoid then
-        humanoid.HipHeight = 0
-        humanoid.WalkSpeed = 8
-    end
-end)
+    -- Create a new animation
+    local danceAnimation = Instance.new("Animation")
+    danceAnimation.AnimationId = "rbxassetid://3189777795" -- Change this to your custom animation ID
+
+    -- Load and play the animation
+    local dance = animator:LoadAnimation(danceAnimation)
+    dance.Looped = true
+    dance:Play()
+end
