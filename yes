@@ -1,16 +1,10 @@
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:FindFirstChildOfClass("Humanoid")
+local Player = game.Players.LocalPlayer
+local Character = Player.Character
+local Humanoid = Character:WaitForChild("Humanoid")
 
-if humanoid then
-    local animator = humanoid:FindFirstChild("Animator") or Instance.new("Animator", humanoid)
+local Animation = Instance.new("Animation")
+Animation.AnimationId = "rbxassetid://3189777795"
 
-    -- Create a new animation
-    local danceAnimation = Instance.new("Animation")
-    danceAnimation.AnimationId = "rbxassetid://3189777795" -- Change this to your custom animation ID
-
-    -- Load and play the animation
-    local dance = animator:LoadAnimation(danceAnimation)
-    dance.Looped = true
-    dance:Play()
-end
+local Track = Humanoid:LoadAnimation(Animation)
+Track:Play()
+Character.Animate:Destroy()
